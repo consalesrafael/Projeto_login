@@ -1,6 +1,10 @@
-const app = require('./server/servidor');
-const PORT = 3000;
+const Express = require("express")
+const app = new Express()
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+
+
+
+app.listen(3000, (req, res)=>{
+    console.log("Servidor aberto ena porta 3000")
+})
+
