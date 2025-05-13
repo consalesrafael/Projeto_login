@@ -14,6 +14,8 @@
     "express": "^5.1.0",
     "mysql2": "^3.14.1",
     "nodemon": "^3.1.10",
+    "path": "^0.12.7",
+    "projeto_login": "file:",
     "sequelize": "^6.37.7",
     "sql": "^0.78.0"
   }
