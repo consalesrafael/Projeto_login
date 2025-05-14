@@ -1,3 +1,5 @@
 const db = require("../../config/banco")
-
-db.post()
+const app = require("/app")
+app.get("/criarUsuario",(req,res)=>{
+    
+})
