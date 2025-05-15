@@ -1,8 +1,10 @@
-const { Sequelize } = require('sequelize');
+const mysql = require("mysql2")
 
-const db = new Sequelize('login', 'root', '1234', {
-  host: 'localhost',
-  dialect: 'mysql'
+const db = mysql.createConnection({
+  host: 'localhost',      
+  user: 'root',          
+  password: 'root',       
+  database: 'projeto_login'
 });
 
 

@@ -9,4 +9,16 @@ function mudaLogin(){
         login.style.display = "flex"
     }
 }
+function verificaSenha(){
+    const senha = document.getElementById("criaSenha")
+    const senhaRep = document.getElementById("senhaRep")
 
+     if(senha.value != senhaRep.value){
+        alert("As senhas não colidem")
+        senha.value = ""
+        senhaRep.value = ''
+        return false
+    }else{
+        return true
+    }
+}
