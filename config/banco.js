@@ -1,23 +1,15 @@
-const mysql = require('mysql2/promise');
-
-const pool = mysql.createPool({
+const Sequelize = require("sequelize")
+const connection = new Sequelize('projeto_login','root','1234',{
   host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'projeto_login',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
+  dialect:'mysql'
 });
-
-(async () => {
-  try {
-    const connection = await pool.getConnection();
-    console.log('✅ Conectado ao MySQL!');
-    connection.release();
-  } catch (err) {
-    console.error('Erro ao conectar ao MySQL:', err);
-  }
-})();
-
-module.exports = pool;
+connection
+        .authenticate()
+        .then(()=>{
+          console.log("Conexao feita com o db")
+        })
+        .catch((msgErro)=>{
+          console.log("msgErro")
+        })
+        
+module.exports = connection;
