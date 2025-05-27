@@ -2,11 +2,13 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const bcrypt = require('bcrypt');
-const db = require("./config/banco"); 
+const db = require("./config");
+const usuario= require("./config/usuario") 
+const bodyParser = require("body-parser");
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
     res.redirect("/login");
@@ -17,27 +19,18 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/criarUsuario", async (req, res) => {
-    const { usuario, email, senha } = req.body;
+    const nome = req.body.usuarioN
+    const email = req.body.emailN
+    const senha = req.body.senhaN
 
-    try {
-        const saltRounds = 10;
-        const senhaHash = await bcrypt.hash(senha, saltRounds);
-
-        const sql = 'INSERT INTO usuarios (usuario, email, senha_hash) VALUES (?, ?, ?)';
-        await db.query(sql, [usuario, email, senhaHash]);
-
-        res.status(201).json({ message: "Usuário criado com sucesso!" });
-
-    } catch (error) {
-        console.error("Erro ao criar usuário:", error);
-
-        if (error.code === 'ER_DUP_ENTRY') {
-            return res.status(400).json({ error: "Email já cadastrado!" });
-        }
-
-        res.status(500).json({ error: "Erro interno no servidor" });
-        console.error('Erro completo:', error);
-    }
+    usuario.create({
+        nome: nome,
+        email: email,
+        senha: senha
+    }).then(()=>{
+        res.render("/login")
+    })
+    
 });
 
 app.post('/validaUsuario', async (req, res) => {
