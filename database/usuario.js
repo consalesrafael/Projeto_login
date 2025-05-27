@@ -1,5 +1,4 @@
 const Sequelize = require("sequelize")
-const db = require('./config')
 const connection = require("./banco")
 
 const usuario = connection.define('usuario',{
