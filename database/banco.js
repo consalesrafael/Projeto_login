@@ -1,8 +1,9 @@
 const Sequelize = require("sequelize")
 
 const connection = new Sequelize('projeto_login','root','root',{
-  host: 'localhost',
-  dialect:'mysql'
+  host: 'localHost',
+  dialect:'mysql',
+  port: 3307
 });
 connection
         .authenticate()

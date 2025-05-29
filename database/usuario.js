@@ -1,22 +1,23 @@
 const Sequelize = require("sequelize")
 const connection = require("./banco")
 
-const usuario = connection.define('usuario',{
-    nome:{ 
-    type: Sequelize.STRING,
-    allowNull: false
+const usuario = connection.define('usuario', {
+    nome: { 
+        type: Sequelize.STRING,
+        allowNull: false
     },
-    email:{
-        type:Sequelize.STRING,
-        allowNull:false
+    email: {
+        type: Sequelize.STRING,
+        allowNull: false
     },
-    senha:{
+    senha: {
         type: Sequelize.STRING,
         allowNull: false
     }
-
+}, {
+    timestamps: false 
 });
 
-usuario.sync({force: false}).then(()=>{})
+ usuario.sync({force: false}).then(()=>{})
 
 module.exports = usuario
