@@ -1,0 +1,16 @@
+<%- include('partials/header.ejs') %>
+<body>
+    <div class="container">
+
+        <% usuario.forEach(usuario=>{%>
+            <div class="card">
+                <div class="card-body">
+
+                </div>
+            </div>
+            <p><%= usuario.email %></p>
+       <%}) %>
+    </div>
+</body>
+<%- include('partials/footer.ejs') %>
+</html>

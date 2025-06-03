@@ -8,17 +8,23 @@ const bcrypt = require("bcrypt")
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-
-
+app.set("view engine", "ejs")
 
 app.get("/", (req, res) => {
     res.redirect("/login");
 });
 
 app.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "login.html"));
+    res.render("login")
 });
+ app.get("/crud",(req,res)=>{
+    usuario.findAll({raw: true}).then(usuarios=>{
+        res.render("crud",{
+            usuario: usuarios
+        })
+    })
+    
+ })
 
 app.post("/criarUsuario", async (req, res) => {
     const nome = req.body.usuarioN;
@@ -53,9 +59,10 @@ app.post("/validaUsuario", async (req, res) => {
             const senhaCorreta = bcrypt.compareSync(senha, usuarioExistente.senha);
 
             if (senhaCorreta) {
-                return res.send("<script>alert('Você entrou'); window.location.href='/login';</script>");
+
+                res.redirect("/crud")
             } else {
-                return res.send("<script>alert('Senha ou email incorretos'); window.location.href='/login';</script>");
+                return res.send("<script>alert('Senha ou email incorretos'); window.location.href='/crud';</script>");
             }
         } else {
             return res.send("<script>alert('Usuário não encontrado'); window.location.href='/login';</script>");
