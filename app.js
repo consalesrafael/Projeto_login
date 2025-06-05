@@ -92,6 +92,20 @@ app.post("/deletarUsuario", (req,res)=>{
         }
     }
 })
+app.post("/modificaUsuario", (req,res)=>{
+    const id = req.body.mod
+
+    if(!id){
+        usuario.update({
+            where:{
+                id:id
+                
+            }
+        }).then(()=>{
+            res.redirect('/crud')
+        })
+    }
+})
 app.listen(3000, () => {
     console.log("Servidor aberto em 3000")
 })

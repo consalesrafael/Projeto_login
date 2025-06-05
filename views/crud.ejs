@@ -11,7 +11,10 @@
                         </div>
                         <div class="card-footer d-flex justify-content-between">
 
-                            <button class="btn btn-warning">Modificar</button>
+                            <form method="post" id="formDel" action="/modificarUsuario">
+                                <input type="hidden" name="mod" value="<%= usuario.id %>">
+                                <button class="btn btn-warning">Modificar</button>
+                            </form>
 
                             <form method="post" id="formDel" action="/deletarUsuario">
                                 <input type="hidden" name="idD" value="<%= usuario.id %>">
