@@ -17,8 +17,8 @@ html, body{
 form{
     display: flex;
     border: inset rgb(34, 34, 87)  40px;
-    width: 300px;
-    height: 550px;
+    width: 450px;
+    height: 590px;
     justify-content: center;
     align-items: center;
 }
@@ -59,4 +59,7 @@ img{
 }
 #criaLogin{
     display: none;
+}
+a{
+    text-decoration: none;
 }

@@ -1,15 +1,22 @@
 <%- include('partials/header.ejs') %>
 <body>
-    <div class="container">
-
-        <% usuario.forEach(usuario=>{%>
-            <div class="card">
-                <div class="card-body">
-
+    <div class="container mt-4">
+        <div class="row">
+            <% usuario.forEach(usuario => { %>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <p><strong>Email:</strong> <%= usuario.email %></p>
+                            <p><strong>Usuário:</strong> <%= usuario.nome %></p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <button class="btn btn-warning">Modificar</button>
+                           <a href="/deletarUsuario" class="btn btn-danger"name="idD">Apagar registro</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <p><%= usuario.email %></p>
-       <%}) %>
+            <% }); %>
+        </div>
     </div>
 </body>
 <%- include('partials/footer.ejs') %>

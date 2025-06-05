@@ -5,7 +5,7 @@ const usuario = require("./database/usuario")
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt")
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.set("view engine", "ejs")
@@ -73,6 +73,10 @@ app.post("/validaUsuario", async (req, res) => {
     }
 });
 
+app.delete("/deletarUsuario", (req,res)=>{
+    var id = req.body.idD
+    console.log(id)
+})
 
 app.listen(3000, () => {
     console.log("Servidor aberto em 3000")
