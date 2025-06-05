@@ -10,8 +10,13 @@
                             <p><strong>Usuário:</strong> <%= usuario.nome %></p>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
+
                             <button class="btn btn-warning">Modificar</button>
-                           <a href="/deletarUsuario" class="btn btn-danger"name="idD">Apagar registro</a>
+
+                            <form method="post" id="formDel" action="/deletarUsuario">
+                                <input type="hidden" name="idD" value="<%= usuario.id %>">
+                                <button class="btn btn-danger">Apagar registro </button> 
+                           </form>
                         </div>
                     </div>
                 </div>

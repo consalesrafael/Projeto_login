@@ -3,12 +3,16 @@ const path = require("path");
 const app = express();
 const usuario = require("./database/usuario")
 const bodyParser = require("body-parser");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const { where } = require("sequelize");
 
-app.use(express.static("public"));
+
+app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.set("view engine", "ejs")
+
+
 
 app.get("/", (req, res) => {
     res.redirect("/login");
@@ -18,6 +22,7 @@ app.get("/login", (req, res) => {
     res.render("login")
 });
  app.get("/crud",(req,res)=>{
+
     usuario.findAll({raw: true}).then(usuarios=>{
         res.render("crud",{
             usuario: usuarios
@@ -26,7 +31,7 @@ app.get("/login", (req, res) => {
     
  })
 
-app.post("/criarUsuario", async (req, res) => {
+app.post("/criarUsuario",  async (req, res) => {
     const nome = req.body.usuarioN;
     const email = req.body.emailN;
     const senha = req.body.senhaN;
@@ -59,7 +64,6 @@ app.post("/validaUsuario", async (req, res) => {
             const senhaCorreta = bcrypt.compareSync(senha, usuarioExistente.senha);
 
             if (senhaCorreta) {
-
                 res.redirect("/crud")
             } else {
                 return res.send("<script>alert('Senha ou email incorretos'); window.location.href='/crud';</script>");
@@ -73,13 +77,22 @@ app.post("/validaUsuario", async (req, res) => {
     }
 });
 
-app.delete("/deletarUsuario", (req,res)=>{
-    var id = req.body.idD
-    console.log(id)
-})
+app.post("/deletarUsuario", (req,res)=>{
+    const id = req.body.idD
 
+    if(id !== undefined){
+        if(!isNaN (id)){
+            usuario.destroy({
+                where:{
+                    id:id
+                }
+            }).then(()=>{
+                res.redirect('/crud')
+            })
+        }
+    }
+})
 app.listen(3000, () => {
     console.log("Servidor aberto em 3000")
-
 })
 

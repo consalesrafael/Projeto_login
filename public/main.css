@@ -14,7 +14,7 @@ html, body{
     align-items: center;
     align-content: center;
 }
-form{
+.formL{
     display: flex;
     border: inset rgb(34, 34, 87)  40px;
     width: 450px;
